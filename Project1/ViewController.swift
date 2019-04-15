@@ -23,19 +23,20 @@ class ViewController: UITableViewController {
         // Adopt large title format
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        // Create filemanager
         let fm = FileManager.default
-        // path is set to app's Bundle (binary + assets)
+        // "path" is set to app's Bundle (binary + assets)
         let path = Bundle.main.resourcePath!
-        // items is set to all the contents found in the directory
+        // "items" is set to all the contents found in the directory
         // located at the path designated above.
-        // items is an array of all resources found
+        // "items" is an array of all resources found
         let items = try! fm.contentsOfDirectory(atPath: path)
         
         // Loop through the item array
         for item in items {
             if item.hasPrefix("nssl") {
                 // This is a picture to load
-                // and append to the pictures property
+                // to be appended to the "pictures" array.
                 pictures.append(item)
             }
             // Sort pictures
