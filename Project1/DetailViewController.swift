@@ -30,6 +30,13 @@ class DetailViewController: UIViewController {
         // force other viewcontrollers to inherit large title mode.
         navigationItem.largeTitleDisplayMode = .never
         
+        // Adding rightbar button
+        // ".action" displays system icon.
+        // "#selector" denotes we are calling the shareTapped method
+        // located in "self" i.e., the present viewcontroller
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self
+            , action: #selector(shareTapped))
+        
         if let imageToLoad = selectedImage {
             imageView.image = UIImage(named: imageToLoad)
         }
@@ -44,5 +51,24 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnTap = false
+    }
+    
+    // @objc required to make it visible to obj-c code used by UIBarButtonItem
+    @objc func shareTapped() {
+        
+        // Check to see if there's an image. If there is, the remaining code will be run
+        guard let image = imageView.image?.jpegData(compressionQuality: 0.8)
+            else {
+                print("No image found")
+                return
+        }
+        
+        // Remember if sharing photos,Info.plist must be modified.
+        // (Add row: "Privacy -- Photo Library addition")
+        // (Add string: "We need to save photos you like" etc)
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        // popoverPresentationController required for iPad
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
     }
 }
