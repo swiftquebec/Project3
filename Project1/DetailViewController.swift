@@ -66,7 +66,7 @@ class DetailViewController: UIViewController {
         // Remember if sharing photos,Info.plist must be modified.
         // (Add row: "Privacy -- Photo Library addition")
         // (Add string: "We need to save photos you like" etc)
-        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [image, title!], applicationActivities: nil)
         // popoverPresentationController required for iPad
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)

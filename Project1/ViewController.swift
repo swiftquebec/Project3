@@ -74,7 +74,7 @@ class ViewController: UITableViewController {
             vc.selectedImage = pictures[indexPath.row]
             
             // Pass along unique detail title text
-            vc.titleText = "Picture \(indexPath.row + 1) of \(pictures.count)"
+            vc.titleText = "\(pictures[indexPath.row])"
             
             // Push it onto the navigation controller:
             navigationController?.pushViewController(vc, animated: true)
